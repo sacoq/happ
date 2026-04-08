@@ -1,85 +1,176 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Скачать Happ — клиент для xankaVPN</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #0f0f0f;
-            color: #e0e0e0;
-            text-align: center;
-            padding: 50px 20px;
-            margin: 0;
-            min-height: 100vh;
-        }
-        .container {
-            max-width: 680px;
-            margin: 0 auto;
-        }
-        h1 {
-            font-size: 2.4em;
-            margin-bottom: 12px;
-            color: #ffffff;
-        }
-        p {
-            font-size: 1.25em;
-            margin-bottom: 45px;
-            color: #aaaaaa;
-        }
-        .btn {
-            display: inline-block;
-            background-color: #1f1f1f;
-            color: #ffffff;
-            padding: 16px 34px;
-            margin: 12px 8px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.15em;
-            border: 1px solid #333333;
-            transition: all 0.3s ease;
-        }
-        .btn:hover {
-            background-color: #2a2a2a;
-            border-color: #00d4ff;
-            color: #00d4ff;
-            transform: translateY(-3px);
-        }
-        .platform {
-            margin: 35px 0;
-        }
-        footer {
-            margin-top: 70px;
-            font-size: 1em;
-            color: #777777;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0A0A0A" id="meta-theme-color">
+<link rel="icon" href="/favicon.png" type="image/png">
+<title>Скачать Happ — клиент для xankaVPN</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+(function(){
+  var theme = localStorage.getItem('miniapp-theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', theme);
+  var meta = document.getElementById('meta-theme-color');
+  if (meta) meta.content = theme === 'dark' ? '#0A0A0A' : '#0A0A0A';
+})();
+</script>
+<style>
+:root, [data-theme="light"] {
+  --void: #0A0A0A; --white: #FFFFFF; --frost: #F5F5F5; --smoke: #555555;
+  --ash: #E8E8E8; --gray-400: #999999; --body-bg: #F0EFED;
+  --header-bg: #0A0A0A; --header-fg: #FFFFFF;
+  --accent: #16a34a; --accent-light: rgba(22,163,74,0.12);
+}
+[data-theme="dark"] {
+  --void: #F5F5F5; --white: #1a1a1a; --frost: #252525; --smoke: #a0a0a0;
+  --ash: #333333; --gray-400: #666666; --body-bg: #0A0A0A;
+  --header-bg: #141414; --header-fg: #FFFFFF;
+  --accent: #22c55e; --accent-light: rgba(34,197,94,0.15);
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { height: 100%; overflow-x: hidden; overflow-y: auto; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--body-bg); color: var(--void);
+  min-height: 100%; -webkit-font-smoothing: antialiased;
+}
+.container {
+  max-width: 100%; width: 100%; margin: 0 auto;
+  padding: 8px 12px;
+  padding-bottom: max(16px, env(safe-area-inset-bottom));
+  min-height: 100vh; display: flex; flex-direction: column;
+}
+@media (min-width: 600px) {
+  .container {
+    max-width: 560px;
+    padding: 20px 20px max(28px, env(safe-area-inset-bottom));
+    margin-top: clamp(8px, 5vh, 48px);
+  }
+}
+.header {
+  background: var(--header-bg); color: var(--header-fg);
+  padding: 14px 18px; border-radius: 8px; margin-bottom: 16px;
+  display: flex; align-items: center; gap: 12px; flex-shrink: 0;
+}
+.header-logo { width: 42px; height: 42px; flex-shrink: 0; }
+.header-logo img { width: 100%; height: 100%; border-radius: 8px; }
+.header-title { font-size: 20px; font-weight: 300; letter-spacing: -0.03em; }
+.header-title span { font-weight: 600; }
+.card {
+  background: var(--white); border: 2px solid var(--ash); border-radius: 10px;
+  overflow: hidden; margin-bottom: 12px;
+}
+.card-header {
+  padding: 16px 18px 0;
+}
+.card-title {
+  font-size: 18px; font-weight: 600; letter-spacing: -0.02em;
+  display: flex; align-items: center; gap: 10px; margin-bottom: 4px;
+}
+.card-subtitle {
+  font-size: 13px; color: var(--smoke); line-height: 1.4; margin-bottom: 16px;
+}
+.card-body {
+  padding: 8px 18px 20px;
+}
+.btn {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; padding: 14px 16px; border: none; border-radius: 8px;
+  font-size: 15px; font-weight: 600; font-family: inherit;
+  cursor: pointer; text-decoration: none; transition: all 0.2s;
+  background: var(--accent); color: #fff;
+}
+.btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+.apps-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+}
+.app-card {
+  background: var(--frost); border: 1px solid var(--ash); border-radius: 10px;
+  padding: 16px 12px; text-decoration: none; color: var(--void);
+  text-align: center; transition: all 0.2s;
+}
+.app-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+}
+.app-name {
+  font-size: 15px; font-weight: 600; margin-top: 8px;
+}
+.app-platform {
+  font-size: 12px; color: var(--smoke); margin-top: 2px;
+}
+footer {
+  text-align: center; padding: 20px 0 12px;
+  font-size: 11px; color: var(--smoke);
+}
+</style>
 </head>
 <body>
-    <div class="container">
-        <h1>Скачать клиент Happ</h1>
-        <p>Для комфортной работы с xankaVPN<br>автоматическая маршрутизация работает только в приложении Happ</p>
+<div class="container">
 
-        <div class="platform">
-            <a href="https://play.google.com/store/apps/details?id=com.happproxy" class="btn" target="_blank">Android</a>
-            <a href="https://play.google.com/store/apps/details?id=com.happproxy" class="btn" target="_blank">Android TV</a>
-        </div>
-
-        <div class="platform">
-            <a href="https://apps.apple.com/ru/app/happ-proxy-utility-plus/id6746188973" class="btn" target="_blank">iOS / iPadOS</a>
-            <a href="https://apps.apple.com/ru/app/happ-proxy-utility-plus/id6746188973" class="btn" target="_blank">macOS</a>
-        </div>
-
-        <div class="platform">
-            <a href="https://github.com/Happ-proxy/happ-desktop/releases/latest/download/setup-Happ.x64.exe" class="btn" target="_blank">Windows</a>
-        </div>
-
-        <footer>
-            После установки добавьте свою подписку xankaVPN в приложение Happ.<br>
-            Автоматическая маршрутизация включится автоматически.
-        </footer>
+  <div class="header">
+    <div class="header-logo">
+      <img src="https://i.ibb.co/Xx9wfHXv/favicon.png" alt="xankaVPN">
     </div>
+    <div>
+      <div class="header-title">xanka<span>VPN</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      <div class="card-title">
+        Скачать клиент Happ
+      </div>
+      <div class="card-subtitle">
+        Автоматическая маршрутизация и умные правила работают только в приложении Happ
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="apps-grid">
+
+        <a href="https://play.google.com/store/apps/details?id=com.happproxy" class="app-card" target="_blank">
+          <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/1a/9a/3f/1a9a3f3f-491e-1ab9-b7e4-d45c9f254606/App_Icon-marketing.lsr/512x512bb.jpg" alt="Happ" style="width:64px;height:64px;border-radius:12px;">
+          <div class="app-name">Android</div>
+          <div class="app-platform">Google Play</div>
+        </a>
+
+        <a href="https://play.google.com/store/apps/details?id=com.happproxy" class="app-card" target="_blank">
+          <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/1a/9a/3f/1a9a3f3f-491e-1ab9-b7e4-d45c9f254606/App_Icon-marketing.lsr/512x512bb.jpg" alt="Happ" style="width:64px;height:64px;border-radius:12px;">
+          <div class="app-name">Android TV</div>
+          <div class="app-platform">Google Play</div>
+        </a>
+
+        <a href="https://apps.apple.com/ru/app/happ-proxy-utility-plus/id6746188973" class="app-card" target="_blank">
+          <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/1a/9a/3f/1a9a3f3f-491e-1ab9-b7e4-d45c9f254606/App_Icon-marketing.lsr/512x512bb.jpg" alt="Happ" style="width:64px;height:64px;border-radius:12px;">
+          <div class="app-name">iOS / iPadOS</div>
+          <div class="app-platform">App Store</div>
+        </a>
+
+        <a href="https://apps.apple.com/ru/app/happ-proxy-utility-plus/id6746188973" class="app-card" target="_blank">
+          <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/1a/9a/3f/1a9a3f3f-491e-1ab9-b7e4-d45c9f254606/App_Icon-marketing.lsr/512x512bb.jpg" alt="Happ" style="width:64px;height:64px;border-radius:12px;">
+          <div class="app-name">macOS</div>
+          <div class="app-platform">App Store</div>
+        </a>
+
+        <a href="https://github.com/Happ-proxy/happ-desktop/releases/latest/download/setup-Happ.x64.exe" class="app-card" target="_blank" style="grid-column: span 2;">
+          <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/1a/9a/3f/1a9a3f3f-491e-1ab9-b7e4-d45c9f254606/App_Icon-marketing.lsr/512x512bb.jpg" alt="Happ" style="width:64px;height:64px;border-radius:12px;">
+          <div class="app-name">Windows</div>
+          <div class="app-platform">Скачать установщик (.exe)</div>
+        </a>
+
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    © 2026 xankaVPN • После установки добавьте подписку в Happ
+  </footer>
+
+</div>
 </body>
 </html>
