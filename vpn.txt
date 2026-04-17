@@ -1,1 +1,0 @@
-vless://84654c4a-1f91-41c5-a7f2-f28364e250d7@burn.best:443?type=tcp&headerType=none&security=tls&sni=burn.best&alpn=h2,http/1.1&fp=chrome&allowInsecure=0#oytqr4v9
